@@ -34,6 +34,7 @@ const LoginPage = () => {
         setError(null);
 
         try {
+            console.log(email, password)
             const response = await fetch('/api/gs-login', {
                 method: 'POST',
                 headers: {

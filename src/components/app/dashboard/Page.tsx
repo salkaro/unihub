@@ -3,7 +3,7 @@
 // Local Imports
 import UpcomingAssignments from './UpcomingAssignments';
 import { AssignmentWithCourse, IAssignmentError } from './models';
-import { Assignment, Course, loginAndGetCoursesWithAssignments } from '@/lib/api';
+import { Assignment, Course, getCoursesWithAssignments } from '@/lib/api';
 
 // External Imports
 import { Box, Container, Divider, useColorMode } from '@chakra-ui/react';
@@ -29,7 +29,7 @@ const Page = () => {
         }
 
         try {
-            const data = await loginAndGetCoursesWithAssignments();
+            const data = await getCoursesWithAssignments();
             setModules(data.student);
 
             // Set assignment errors if any

@@ -4,7 +4,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 
 // Local Imports
 import { Providers } from "./providers";
-import Navbar from "@/components/ui/navbar";
 
 // Styles
 import "@/styles/globals.css";
@@ -55,7 +54,6 @@ export default function RootLayout({
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
                 <Providers>
-                    <Navbar />
                     {children}
                 </Providers>
             </body>

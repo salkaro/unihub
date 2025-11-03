@@ -21,6 +21,7 @@ import {
     Hide,
 } from '@chakra-ui/react';
 import { MoonIcon, SunIcon, HamburgerIcon } from '@chakra-ui/icons';
+import { LogOut } from 'lucide-react';
 
 const Navbar = () => {
     const router = useRouter();
@@ -30,11 +31,11 @@ const Navbar = () => {
 
     const tabs = [
         { id: 'home', label: 'Home', path: '/dashboard' },
-        { id: 'physics', label: 'Physics', path: '/module/physics' },
-        { id: 'maths-a', label: 'Maths A', path: '/module/maths-a' },
-        { id: 'maths-b', label: 'Maths B', path: '/module/maths-b' },
-        { id: 'astronomy', label: 'Astronomy', path: '/module/astronomy' },
-        { id: 'geoscience', label: 'Geoscience', path: '/module/geoscience' },
+        { id: 'physics', label: 'Physics', path: '/dashboard/module/physics' },
+        { id: 'maths-a', label: 'Maths A', path: '/dashboard/module/maths-a' },
+        { id: 'maths-b', label: 'Maths B', path: '/dashboard/module/maths-b' },
+        { id: 'astronomy', label: 'Astronomy', path: '/dashboard/module/astronomy' },
+        { id: 'geoscience', label: 'Geoscience', path: '/dashboard/module/geoscience' },
     ];
 
     const handleTabClick = (path: string) => {
@@ -44,6 +45,15 @@ const Navbar = () => {
 
     const isActiveTab = (path: string) => {
         return pathname === path;
+    };
+
+    const handleLogout = () => {
+        // Clear session storage
+        sessionStorage.clear();
+
+        // Redirect to login page
+        router.push('/');
+        onClose();
     };
 
     return (
@@ -87,8 +97,8 @@ const Navbar = () => {
                                             bg: isActiveTab(tab.path)
                                                 ? 'blue.600'
                                                 : colorMode === 'light'
-                                                ? 'gray.100'
-                                                : 'gray.700',
+                                                    ? 'gray.100'
+                                                    : 'gray.700',
                                         }}
                                         transition="all 0.2s"
                                     >
@@ -100,6 +110,15 @@ const Navbar = () => {
                     </Flex>
 
                     <Flex gap={2} alignItems="center">
+                        <Hide below="md">
+                            <IconButton
+                                aria-label="Logout"
+                                icon={<LogOut size={20} />}
+                                variant="ghost"
+                                size="md"
+                                onClick={handleLogout}
+                            />
+                        </Hide>
                         <IconButton
                             aria-label="Toggle color mode"
                             icon={colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
@@ -147,6 +166,17 @@ const Navbar = () => {
                                     {tab.label}
                                 </Button>
                             ))}
+                            <Button
+                                size="lg"
+                                colorScheme="red"
+                                variant="ghost"
+                                onClick={handleLogout}
+                                justifyContent="flex-start"
+                                w="full"
+                                mt={4}
+                            >
+                                Logout
+                            </Button>
                         </VStack>
                     </DrawerBody>
                 </DrawerContent>

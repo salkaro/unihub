@@ -188,57 +188,60 @@ export async function getAssignments(courseId: string): Promise<Assignment[]> {
 }
 
 /**
- * Login and fetch courses in one call
+ * Fetch courses, and fetch assignments for each course
  */
-export async function loginAndGetCourses(): Promise<CoursesResponse> {
-    await login();
-    return getCourses();
-}
+export async function getCoursesWithAssignments(): Promise<CoursesResponse> {
+  const cacheKey = "gs-courses-with-assignments";
 
-/**
- * Login, fetch courses, and fetch assignments for each course
- */
-export async function loginAndGetCoursesWithAssignments(): Promise<CoursesResponse> {
-    const cacheKey = 'gs-courses-with-assignments';
+  // Check cache first
+  const cached = getCachedData<CoursesResponse>(cacheKey);
+  if (cached) {
+    return cached;
+  }
 
-    // Check cache first
-    const cached = getCachedData<CoursesResponse>(cacheKey);
-    if (cached) {
-        return cached;
-    }
+  // Fetch courses data
+  const coursesData = await getCourses();
 
-    // Fetch courses data
-    const coursesData = await loginAndGetCourses();
+  // Track errors when fetching assignments
+  const assignmentErrors: {
+    courseId: string;
+    courseName: string;
+    error: string;
+  }[] = [];
 
-    // Track errors when fetching assignments
-    const assignmentErrors: { courseId: string; courseName: string; error: string }[] = [];
+  // Fetch assignments for each student course
+  const studentCoursesWithAssignments = await Promise.all(
+    Object.entries(coursesData.student).map(async ([courseId, course]) => {
+      try {
+        const assignments = await getAssignments(courseId);
+        return [courseId, { ...course, assignments }];
+      } catch (error) {
+        console.error(
+          `Failed to fetch assignments for course ${courseId}:`,
+          error
+        );
+        assignmentErrors.push({
+          courseId,
+          courseName: course.full_name,
+          error:
+            error instanceof Error
+              ? error.message
+              : "Failed to fetch assignments",
+        });
+        return [courseId, { ...course, assignments: [] }];
+      }
+    })
+  );
 
-    // Fetch assignments for each student course
-    const studentCoursesWithAssignments = await Promise.all(
-        Object.entries(coursesData.student).map(async ([courseId, course]) => {
-            try {
-                const assignments = await getAssignments(courseId);
-                return [courseId, { ...course, assignments }];
-            } catch (error) {
-                console.error(`Failed to fetch assignments for course ${courseId}:`, error);
-                assignmentErrors.push({
-                    courseId,
-                    courseName: course.full_name,
-                    error: error instanceof Error ? error.message : 'Failed to fetch assignments'
-                });
-                return [courseId, { ...course, assignments: [] }];
-            }
-        })
-    );
+  const result: CoursesResponse = {
+    ...coursesData,
+    student: Object.fromEntries(studentCoursesWithAssignments),
+    assignmentErrors:
+      assignmentErrors.length > 0 ? assignmentErrors : undefined,
+  };
 
-    const result: CoursesResponse = {
-        ...coursesData,
-        student: Object.fromEntries(studentCoursesWithAssignments),
-        assignmentErrors: assignmentErrors.length > 0 ? assignmentErrors : undefined
-    };
+  // Cache the result
+  setCachedData(cacheKey, result);
 
-    // Cache the result
-    setCachedData(cacheKey, result);
-
-    return result;
+  return result;
 }
