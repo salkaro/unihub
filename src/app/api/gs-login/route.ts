@@ -3,13 +3,8 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
   try {
     const bodyText = await request.text();
-
-    console.log("Method:", request.method);
-    console.log("Headers:", Object.fromEntries(request.headers));
-    console.log("Raw body:", bodyText);
-
     const { email, password } = JSON.parse(bodyText || "{}");
-    console.log(email, password)
+
     if (!email || !password) {
       return NextResponse.json(
         { error: "Email or password not configured" },
