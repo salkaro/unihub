@@ -159,7 +159,7 @@ const LoginPage = () => {
                                         size="lg"
                                         width="100%"
                                         isLoading={loading}
-                                        loadingText="Logging in..."
+                                        loadingText="Processing..."
                                         borderRadius="xl"
                                         fontWeight="bold"
                                         fontSize="md"
@@ -169,7 +169,7 @@ const LoginPage = () => {
                                         }}
                                         transition="all 0.2s"
                                     >
-                                        Sign In
+                                        Login
                                     </Button>
 
                                     <Text color="gray.500" fontSize="sm" textAlign="center">
