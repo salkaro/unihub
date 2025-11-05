@@ -1,9 +1,10 @@
 "use client";
 
-import { Box, Container, Button, Heading, Text, VStack, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Input, InputGroup, InputLeftElement, HStack } from "@chakra-ui/react";
+import { Box, Container, Button, Heading, Text, VStack, Input, InputGroup, InputLeftElement, HStack } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import Link from "next/link";
 import Footer from "../../ui/footer";
+import PublicNavbar from "../../ui/public-navbar";
 
 interface BankLayoutProps {
     children: React.ReactNode;
@@ -18,37 +19,14 @@ interface BankLayoutProps {
     searchPlaceholder?: string;
 }
 
-export default function BankLayout({ children, title, description, breadcrumbs, searchValue, onSearchChange, searchPlaceholder = "Search topics..." }: BankLayoutProps) {
+export default function Layout({ children, title, description, searchValue, onSearchChange, searchPlaceholder = "Search topics..." }: BankLayoutProps) {
     return (
         <Box minH="100vh" display="flex" flexDirection="column" bg="gray.50">
+            <PublicNavbar />
             {/* Header Section */}
             <Box bg="white" borderBottom="1px" borderColor="gray.200" py={8}>
                 <Container maxW="6xl">
                     <VStack spacing={4} align="start">
-                        {/* Breadcrumbs */}
-                        <Breadcrumb fontSize="sm" color="gray.600">
-                            <BreadcrumbItem>
-                                <BreadcrumbLink as={Link} href="/">
-                                    Home
-                                </BreadcrumbLink>
-                            </BreadcrumbItem>
-                            <BreadcrumbItem>
-                                <BreadcrumbLink as={Link} href="/bank">
-                                    Question Bank
-                                </BreadcrumbLink>
-                            </BreadcrumbItem>
-                            {breadcrumbs?.map((crumb, index) => (
-                                <BreadcrumbItem key={index} isCurrentPage={index === breadcrumbs.length - 1}>
-                                    {index === breadcrumbs.length - 1 ? (
-                                        <BreadcrumbLink>{crumb.label}</BreadcrumbLink>
-                                    ) : (
-                                        <BreadcrumbLink as={Link} href={crumb.href}>
-                                            {crumb.label}
-                                        </BreadcrumbLink>
-                                    )}
-                                </BreadcrumbItem>
-                            ))}
-                        </Breadcrumb>
 
                         <Button
                             as={Link}
@@ -109,7 +87,7 @@ export default function BankLayout({ children, title, description, breadcrumbs, 
             </Box>
 
             {/* Content Section */}
-            <Box as="section" py={{ base: 12, md: 16 }} flex="1">
+            <Box as="section" py={{ base: 12, md: 16 }} flex="1" minH="100vh">
                 <Container maxW="6xl">
                     {children}
                 </Container>

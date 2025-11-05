@@ -1,9 +1,9 @@
 "use client";
 
-import { Box, Container, Heading, Text, VStack, SimpleGrid, Button } from "@chakra-ui/react";
-import Link from "next/link";
+import { Box, Container, Heading, Text, VStack, SimpleGrid } from "@chakra-ui/react";
 import SubjectCard from "@/components/ui/subject-card";
 import Footer from "../../ui/footer";
+import PublicNavbar from "../../ui/public-navbar";
 
 interface Subject {
     id: string;
@@ -25,25 +25,26 @@ const subjects: Subject[] = [
         color: "blue",
         href: "/bank/mathematics",
     },
+    {
+        id: "physics",
+        title: "Physics",
+        description: "Classical Mechanics, Electromagnetism, Thermodynamics, Quantum Physics, and Modern Physics topics.",
+        moduleCount: 1,
+        questionCount: 20,
+        color: "purple",
+        href: "/bank/physics",
+    },
 ];
 
 export default function BankPage() {
     return (
         <Box minH="100vh" display="flex" flexDirection="column" bg="gray.50">
+            <PublicNavbar />
+
             {/* Header Section */}
             <Box bg="white" borderBottom="1px" borderColor="gray.200" py={8}>
                 <Container maxW="6xl">
                     <VStack spacing={4} align="start">
-                        <Button
-                            as={Link}
-                            href="/"
-                            variant="ghost"
-                            colorScheme="gray"
-                            size="sm"
-                            mb={2}
-                        >
-                            ← Back to Home
-                        </Button>
                         <Heading
                             as="h1"
                             fontSize={{ base: "3xl", md: "5xl" }}
@@ -62,7 +63,7 @@ export default function BankPage() {
             </Box>
 
             {/* Subjects Grid */}
-            <Box as="section" py={{ base: 12, md: 16 }} flex="1">
+            <Box as="section" py={{ base: 12, md: 16 }} flex="1" minH="100vh">
                 <Container maxW="6xl">
                     <SimpleGrid
                         columns={{ base: 1, md: 2, lg: 3 }}

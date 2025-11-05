@@ -15,10 +15,10 @@ import {
     Alert,
     AlertIcon,
     AlertDescription,
-    Text,
-    HStack,
+    Text
 } from "@chakra-ui/react";
 import Footer from '../../ui/footer';
+import PublicNavbar from '@/components/ui/public-navbar';
 
 
 const LoginPage = () => {
@@ -62,62 +62,7 @@ const LoginPage = () => {
 
     return (
         <Box minH="100vh" display="flex" flexDirection="column">
-            {/* Background gradient section */}
-            <Box
-                position="relative"
-                overflow="hidden"
-                bgGradient="linear(to-br, teal.400, blue.500, purple.600)"
-                py={{ base: 8, md: 4 }}
-            >
-                {/* Decorative blur elements */}
-                <Box
-                    position="absolute"
-                    top="-20%"
-                    right="-10%"
-                    w="400px"
-                    h="200px"
-                    bg="purple.400"
-                    opacity={0.3}
-                    filter="blur(100px)"
-                    borderRadius="full"
-                />
-                <Box
-                    position="absolute"
-                    bottom="-20%"
-                    left="-10%"
-                    w="300px"
-                    h="300px"
-                    bg="teal.300"
-                    opacity={0.3}
-                    filter="blur(100px)"
-                    borderRadius="full"
-                />
-
-                <Container maxW="6xl" position="relative" zIndex={1}>
-                    <HStack justify="space-between" align="center">
-                        <Heading
-                            as={Link}
-                            href="/"
-                            color="white"
-                            fontSize={{ base: "2xl", md: "3xl" }}
-                            fontWeight="bold"
-                            cursor="pointer"
-                            _hover={{ opacity: 0.9 }}
-                        >
-                            UniHub
-                        </Heading>
-                        <Button
-                            as={Link}
-                            href="/"
-                            variant="ghost"
-                            color="white"
-                            _hover={{ bg: "whiteAlpha.200" }}
-                        >
-                            Back to Home
-                        </Button>
-                    </HStack>
-                </Container>
-            </Box>
+            <PublicNavbar />
 
             {/* Login Form Section */}
             <Box

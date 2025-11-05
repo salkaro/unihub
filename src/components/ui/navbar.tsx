@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import {
     Box,
@@ -23,19 +23,160 @@ import {
 import { MoonIcon, SunIcon, HamburgerIcon } from '@chakra-ui/icons';
 import { LogOut } from 'lucide-react';
 
+interface Course {
+    id: string;
+    name: string;
+    slug: string;
+}
+
+interface StudentCourse {
+    name: string;
+    full_name: string;
+    semester: string;
+    year: string;
+    num_grades_published: string | null;
+    num_assignments: string;
+}
+
 const Navbar = () => {
     const router = useRouter();
     const pathname = usePathname();
     const { colorMode, toggleColorMode } = useColorMode();
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const [courses, setCourses] = useState<Course[]>([]);
 
+    // Fetch user's courses from sessionStorage
+    useEffect(() => {
+        // Subject keywords to look for
+        const subjectKeywords = [
+            'physics', 'maths', 'math', 'mathematics', 'chemistry', 'biology',
+            'computer science', 'cs', 'astronomy', 'geoscience', 'geology',
+            'engineering', 'calculus', 'algebra', 'statistics'
+        ];
+
+        // Function to extract subject name and create slug
+        const extractSubjectInfo = (courseName: string): { name: string; slug: string } | null => {
+            const lowerName = courseName.toLowerCase();
+
+            // Check for subject keywords
+            for (const keyword of subjectKeywords) {
+                if (lowerName.includes(keyword)) {
+                    let displayName = '';
+
+                    // Extract the subject name based on keyword
+                    if (keyword === 'astronomy' || keyword === 'physics' || keyword === 'chemistry' ||
+                        keyword === 'biology' || keyword === 'geology' || keyword === 'geoscience') {
+                        // For single-word subjects, just capitalize and optionally add suffix
+                        const capitalizedKeyword = keyword.charAt(0).toUpperCase() + keyword.slice(1);
+
+                        // Check if there's a suffix like "I", "II", "A", "B", etc.
+                        const suffixMatch = courseName.match(new RegExp(`${keyword}\\s+(I{1,3}|[A-Z]|\\d+)`, 'i'));
+                        if (suffixMatch) {
+                            displayName = `${capitalizedKeyword} ${suffixMatch[1]}`;
+                        } else {
+                            displayName = capitalizedKeyword;
+                        }
+                    } else if (keyword === 'maths' || keyword === 'math' || keyword === 'mathematics') {
+                        // For maths variants, check for suffixes
+                        const suffixMatch = courseName.match(/(?:maths?|mathematics)\s+(I{1,3}|[A-Z]|\d+)/i);
+                        if (suffixMatch) {
+                            displayName = `Maths ${suffixMatch[1]}`;
+                        } else {
+                            displayName = 'Mathematics';
+                        }
+                    } else if (keyword === 'computer science' || keyword === 'cs') {
+                        const suffixMatch = courseName.match(/(?:computer science|cs)\s+(I{1,3}|[A-Z]|\d+)/i);
+                        if (suffixMatch) {
+                            displayName = `Computer Science ${suffixMatch[1]}`;
+                        } else {
+                            displayName = 'Computer Science';
+                        }
+                    } else {
+                        // For other keywords (calculus, algebra, statistics, engineering)
+                        const capitalizedKeyword = keyword.split(' ').map(word =>
+                            word.charAt(0).toUpperCase() + word.slice(1)
+                        ).join(' ');
+
+                        const suffixMatch = courseName.match(new RegExp(`${keyword}\\s+(I{1,3}|[A-Z]|\\d+)`, 'i'));
+                        if (suffixMatch) {
+                            displayName = `${capitalizedKeyword} ${suffixMatch[1]}`;
+                        } else {
+                            displayName = capitalizedKeyword;
+                        }
+                    }
+
+                    // Create slug from display name
+                    const slug = displayName
+                        .toLowerCase()
+                        .replace(/[^a-z0-9\s-]/g, '')
+                        .replace(/\s+/g, '-')
+                        .replace(/-+/g, '-')
+                        .trim();
+
+                    return {
+                        name: displayName,
+                        slug: slug
+                    };
+                }
+            }
+
+            return null;
+        };
+
+        const fetchCourses = () => {
+            try {
+                // Try to get from sessionStorage first
+                const cachedData = sessionStorage.getItem('gs-courses');
+                console.log(cachedData)
+
+                if (cachedData) {
+                    const parsedData = JSON.parse(cachedData);
+
+                    // Extract relevant courses
+                    const extractedCourses: Course[] = [];
+
+                    // Parse the cache structure: data.student contains courses
+                    if (parsedData.data && parsedData.data.student) {
+                        const studentCourses = parsedData.data.student as Record<string, StudentCourse>;
+
+                        // Iterate through student courses
+                        Object.entries(studentCourses).forEach(([courseId, course]) => {
+                            const courseName = course.full_name || course.name || '';
+                            const subjectInfo = extractSubjectInfo(courseName);
+
+                            if (subjectInfo) {
+                                extractedCourses.push({
+                                    id: courseId,
+                                    name: subjectInfo.name,
+                                    slug: subjectInfo.slug
+                                });
+                            }
+                        });
+                    }
+
+                    // Remove duplicates based on slug
+                    const uniqueCourses = extractedCourses.filter((course, index, self) =>
+                        index === self.findIndex((c) => c.slug === course.slug)
+                    );
+
+                    setCourses(uniqueCourses);
+                }
+            } catch (error) {
+                console.error('Error fetching courses:', error);
+            }
+        };
+
+        fetchCourses();
+    }, []);
+
+    // Build tabs from courses
     const tabs = [
         { id: 'home', label: 'Home', path: '/dashboard' },
-        { id: 'physics', label: 'Physics', path: '/dashboard/module/physics' },
-        { id: 'maths-a', label: 'Maths A', path: '/dashboard/module/maths-a' },
-        { id: 'maths-b', label: 'Maths B', path: '/dashboard/module/maths-b' },
-        { id: 'astronomy', label: 'Astronomy', path: '/dashboard/module/astronomy' },
-        { id: 'geoscience', label: 'Geoscience', path: '/dashboard/module/geoscience' },
+        ...courses.map(course => ({
+            id: course.slug,
+            label: course.name,
+            path: `/dashboard/module/${course.slug}`
+        }))
     ];
 
     const handleTabClick = (path: string) => {

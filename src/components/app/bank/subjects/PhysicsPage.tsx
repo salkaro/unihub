@@ -2,10 +2,10 @@
 
 import { useState, useMemo } from "react";
 import { SimpleGrid, Heading, Text, Box } from "@chakra-ui/react";
-import BankLayout from "./Layout";
+import Layout from "../Layout";
 import TopicCard from "@/components/ui/topic-card";
 
-interface MathTopic {
+interface Topic {
     id: string;
     title: string;
     description: string;
@@ -13,48 +13,27 @@ interface MathTopic {
     pdfUrl?: string;
 }
 
-const mathTopics: MathTopic[] = [
+const topics: Topic[] = [
     {
-        id: "ordinary-differential-equations",
-        title: "Ordinary Differential Equations",
-        description: "First and second-order ODEs, Bernoulli ODEs, homogeneous & non-homogeneous ODEs",
+        id: "circular-motion",
+        title: "Circular Motion",
+        description: "Uniform and non-uniform circular motion, centripetal force, angular velocity/acceleration, and applications in orbital motion.",
         questionCount: 20,
-        pdfUrl: "/pdfs/math/ordinary-differential-equations.pdf",
+        pdfUrl: "/pdfs/physics/circular-motion.pdf",
     },
-    {
-        id: "de-moirves-theorem",
-        title: "De Moivre's Theorem",
-        description: "First and second-order ODEs, Bernoulli ODEs, homogeneous & non-homogeneous ODEs",
-        questionCount: 10,
-        pdfUrl: "/pdfs/math/de-moirves-theorem.pdf",
-    },
-    {
-        id: "roots-of-unity",
-        title: "Roots Of Unity",
-        description: "Sums, products, and geometric properties of nth roots of unity",
-        questionCount: 20,
-        pdfUrl: "/pdfs/math/roots-of-unity.pdf",
-    },
-    {
-        id: "proof-by-induction",
-        title: "Proof By Induction",
-        description: "Summations, divisbility, matrices",
-        questionCount: 19,
-        pdfUrl: "/pdfs/math/proof-by-induction.pdf",
-    }
 ];
 
-export default function MathematicsPage() {
+const PhysicsPage = () => {
     const [searchQuery, setSearchQuery] = useState("");
 
     // Filter topics based on search query
     const filteredTopics = useMemo(() => {
         if (!searchQuery.trim()) {
-            return mathTopics;
+            return topics;
         }
 
         const query = searchQuery.toLowerCase();
-        return mathTopics.filter((topic) => {
+        return topics.filter((topic) => {
             return (
                 topic.title.toLowerCase().includes(query) ||
                 topic.description.toLowerCase().includes(query)
@@ -63,13 +42,12 @@ export default function MathematicsPage() {
     }, [searchQuery]);
 
     return (
-        <BankLayout
-            title="Mathematics"
-            description="Comprehensive collection of practice questions covering all major areas of university mathematics. From foundational calculus to advanced topics in analysis and algebra."
-            breadcrumbs={[{ label: "Mathematics", href: "/bank/mathematics" }]}
+        <Layout
+            title="Physics"
+            description="Extensive collection of practice questions covering all key topics in university physics. From classical mechanics to modern physics, including problem-solving and conceptual understanding."
             searchValue={searchQuery}
             onSearchChange={setSearchQuery}
-            searchPlaceholder="Search math topics..."
+            searchPlaceholder="Search physics topics..."
         >
             <Box mb={8}>
                 <Heading size="lg" mb={2} color="blue.600">
@@ -82,7 +60,7 @@ export default function MathematicsPage() {
                         </>
                     ) : (
                         <>
-                            Browse through {mathTopics.length} mathematics topics covering fundamental to advanced concepts.
+                                Browse through {topics.length} physics topics covering fundamental to advanced concepts.
                             Each topic includes comprehensive question sets in PDF format.
                         </>
                     )}
@@ -123,6 +101,8 @@ export default function MathematicsPage() {
                     </Text>
                 </Box>
             )}
-        </BankLayout>
+        </Layout>
     );
 }
+
+export default PhysicsPage
