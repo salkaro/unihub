@@ -20,6 +20,27 @@ const mathTopics: MathTopic[] = [
         description: "First and second-order ODEs, Bernoulli ODEs, homogeneous & non-homogeneous ODEs",
         questionCount: 20,
         pdfUrl: "/pdfs/math/ordinary-differential-equations.pdf",
+    },
+    {
+        id: "de-moirves-theorem",
+        title: "De Moivre's Theorem",
+        description: "First and second-order ODEs, Bernoulli ODEs, homogeneous & non-homogeneous ODEs",
+        questionCount: 10,
+        pdfUrl: "/pdfs/math/de-moirves-theorem.pdf",
+    },
+    {
+        id: "roots-of-unity",
+        title: "Roots Of Unity",
+        description: "Sums, products, and geometric properties of nth roots of unity",
+        questionCount: 20,
+        pdfUrl: "/pdfs/math/roots-of-unity.pdf",
+    },
+    {
+        id: "proof-by-induction",
+        title: "Proof By Induction",
+        description: "Summations, divisbility, matrices",
+        questionCount: 19,
+        pdfUrl: "/pdfs/math/proof-by-induction.pdf",
     }
 ];
 

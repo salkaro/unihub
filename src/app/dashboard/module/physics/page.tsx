@@ -41,6 +41,16 @@ const physicsLinks: PhysicsLink[] = [
         title: "Physics Portal",
         description: "Durham Physics teaching portal",
         url: "https://teaching.physics.dur.ac.uk/portal.php"
+    },
+    {
+        title: "SharePoint",
+        description: "Range of resourses, including MyTimetable, term date & other info",
+        url: "https://durhamuniversity.sharepoint.com/teams/PhysicsHub/SitePages/Undergraduates.aspx"
+    },
+    {
+        title: "Database",
+        description: "Student & advisor information",
+        url: "https://www.physics.dur.ac.uk/"
     }
 ];
 

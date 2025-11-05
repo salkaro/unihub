@@ -3,7 +3,7 @@
 import { Box, Container, Heading, Text, VStack, SimpleGrid, Button } from "@chakra-ui/react";
 import Link from "next/link";
 import SubjectCard from "@/components/ui/subject-card";
-import Footer from "../Footer";
+import Footer from "../../ui/footer";
 
 interface Subject {
     id: string;
@@ -20,8 +20,8 @@ const subjects: Subject[] = [
         id: "mathematics",
         title: "Mathematics",
         description: "Calculus, Linear Algebra, Differential Equations, and more advanced mathematical concepts",
-        moduleCount: 1,
-        questionCount: 20,
+        moduleCount: 4,
+        questionCount: 50,
         color: "blue",
         href: "/bank/mathematics",
     },

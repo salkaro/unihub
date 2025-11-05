@@ -3,7 +3,7 @@
 import { Box, Container, Button, Heading, Text, VStack, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Input, InputGroup, InputLeftElement, HStack } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import Link from "next/link";
-import Footer from "../Footer";
+import Footer from "../../ui/footer";
 
 interface BankLayoutProps {
     children: React.ReactNode;
