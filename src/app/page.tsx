@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
-import LoginPage from "@/components/app/LoginPage";
+import HomePage from "@/components/app/HomePage";
 
 export const metadata: Metadata = {
-    title: "Login",
-    description: "Sign in to UniHub to access your academic dashboard, track assignments, and manage your university courses.",
+    title: "UniHub - Question Bank",
+    description: "Access comprehensive question banks across different subjects and modules",
     openGraph: {
-        title: "Login | UniHub",
-        description: "Sign in to UniHub to access your academic dashboard, track assignments, and manage your university courses.",
+        title: "UniHub - Question Bank",
+        description: "Access comprehensive question banks across different subjects and modules",
     },
 };
 
-export default function Login() {
-    return <LoginPage />;
+export default function Root() {
+    return <HomePage />;
 }
