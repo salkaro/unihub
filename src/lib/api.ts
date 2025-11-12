@@ -121,7 +121,7 @@ export async function getCourses(): Promise<CoursesResponse> {
         ...data,
         student: Object.fromEntries(
             Object.entries(data.student).filter(([id]) =>
-                id !== '1157856' && id !== '1149916'
+                id !== '1157856'
             )
         )
     };

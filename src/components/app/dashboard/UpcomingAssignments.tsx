@@ -1,6 +1,6 @@
 // Local Imports
 import { AssignmentWithCourse, IAssignmentError } from './models';
-import { Alert, AlertDescription, AlertIcon, AlertTitle, Badge, Box, Button, Card, CardBody, Center, Divider, Heading, HStack, Spinner, Text, useColorMode, VStack } from '@chakra-ui/react';
+import { Alert, AlertDescription, AlertIcon, AlertTitle, Badge, Box, Button, Card, CardBody, Center, Divider, Heading, HStack, Skeleton, Text, useColorMode, VStack } from '@chakra-ui/react';
 
 
 interface Props {
@@ -17,7 +17,6 @@ const UpcomingAssignments: React.FC<Props> = ({ loading, error, assignmentErrors
         const date = new Date(dateString);
         const now = new Date();
         const diffTime = date.getTime() - now.getTime();
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
         const formattedDate = date.toLocaleDateString('en-US', {
             month: 'short',
@@ -25,15 +24,20 @@ const UpcomingAssignments: React.FC<Props> = ({ loading, error, assignmentErrors
             hour: '2-digit',
             minute: '2-digit'
         });
+    
+        // Normalize to midnight for date-only comparison
+        const dueDay = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        const dayDiff = Math.round((dueDay.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
 
-        if (diffDays < 0) {
+        if (diffTime < 0) {
             return { text: formattedDate, badge: 'Overdue', badgeColor: 'red' };
-        } else if (diffDays === 0) {
+        } else if (dayDiff === 0) {
             return { text: formattedDate, badge: 'Due Today', badgeColor: 'orange' };
-        } else if (diffDays === 1) {
+        } else if (dayDiff === 1) {
             return { text: formattedDate, badge: 'Due Tomorrow', badgeColor: 'yellow' };
         } else {
-            return { text: formattedDate, badge: `${diffDays} days left`, badgeColor: 'blue' };
+            return { text: formattedDate, badge: `${dayDiff} days left`, badgeColor: 'blue' };
         }
     };
 
@@ -50,15 +54,34 @@ const UpcomingAssignments: React.FC<Props> = ({ loading, error, assignmentErrors
             </Heading>
 
             {loading && (
-                <Center py={20}>
-                    <Spinner
-                        thickness="4px"
-                        speed="0.65s"
-                        emptyColor="gray.200"
-                        color="blue.500"
-                        size="xl"
-                    />
-                </Center>
+                <VStack spacing={4} align="stretch">
+                    {[1, 2, 3].map((index) => (
+                        <Card
+                            key={index}
+                            bg={colorMode === 'light' ? 'white' : 'gray.800'}
+                            shadow="md"
+                        >
+                            <CardBody>
+                                <VStack align="stretch" spacing={3}>
+                                    <HStack justify="space-between" align="start">
+                                        <Box flex="1">
+                                            <Skeleton height="24px" width="60%" mb={2} />
+                                            <Skeleton height="16px" width="40%" />
+                                        </Box>
+                                        <Skeleton height="24px" width="80px" borderRadius="full" />
+                                    </HStack>
+
+                                    <Divider />
+
+                                    <HStack spacing={4}>
+                                        <Skeleton height="16px" width="150px" />
+                                        <Skeleton height="20px" width="80px" borderRadius="md" />
+                                    </HStack>
+                                </VStack>
+                            </CardBody>
+                        </Card>
+                    ))}
+                </VStack>
             )}
 
             {error && (
