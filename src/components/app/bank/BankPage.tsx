@@ -34,6 +34,15 @@ const subjects: Subject[] = [
         color: "purple",
         href: "/bank/physics",
     },
+    {
+        id: "astronomy",
+        title: "Astronomy",
+        description: "Covers planetary motion, stellar evolution, galaxies, cosmology, and observational astronomy.",
+        moduleCount: 1,
+        questionCount: 20,
+        color: "gray",
+        href: "/bank/astronomy",
+    },
 ];
 
 export default function BankPage() {
