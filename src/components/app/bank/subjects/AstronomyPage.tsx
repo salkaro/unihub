@@ -21,6 +21,13 @@ const topics: Topic[] = [
         questionCount: 20,
         pdfUrl: "/pdfs/astronomy/planetary-motion.pdf",
     },
+    {
+        id: "variants",
+        title: "Variant Questions",
+        description: "Questions from each topic",
+        questionCount: 22,
+        pdfUrl: "/pdfs/astronomy/variant.pdf",
+    },
 ];
 
 const AstronomyPage = () => {
