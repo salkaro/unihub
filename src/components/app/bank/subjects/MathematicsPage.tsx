@@ -15,6 +15,13 @@ interface Topic {
 
 const topics: Topic[] = [
     {
+        id: "variants",
+        title: "Variant Questions",
+        description: "Questions from each topic",
+        questionCount: 42,
+        pdfUrl: "/pdfs/math/variant.pdf",
+    },
+    {
         id: "ordinary-differential-equations",
         title: "Ordinary Differential Equations",
         description: "First and second-order ODEs, Bernoulli ODEs, homogeneous & non-homogeneous ODEs",
