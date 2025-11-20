@@ -69,9 +69,9 @@ const LoginPage = () => {
                 flex="1"
                 bg="gray.50"
                 display="flex"
-                alignItems="center"
+                alignItems="flex-start"
                 justifyContent="center"
-                py={{ base: 12, md: 20 }}
+                py={{ base: 8, md: 28 }}
                 minH="100vh"
             >
                 <Container maxW="md">

@@ -1,6 +1,7 @@
 // Local Imports
 import { AssignmentWithCourse, IAssignmentError } from './models';
-import { Alert, AlertDescription, AlertIcon, AlertTitle, Badge, Box, Button, Card, CardBody, Center, Divider, Heading, HStack, Skeleton, Text, useColorMode, VStack } from '@chakra-ui/react';
+import { Alert, AlertDescription, AlertIcon, AlertTitle, Badge, Box, Button, Card, CardBody, Center, Divider, Heading, HStack, IconButton, Skeleton, Text, useColorMode, VStack } from '@chakra-ui/react';
+import { RepeatIcon } from '@chakra-ui/icons';
 
 
 interface Props {
@@ -43,15 +44,27 @@ const UpcomingAssignments: React.FC<Props> = ({ loading, error, assignmentErrors
 
     return (
         <>
-            <Heading
-                as="h1"
-                size="xl"
-                mb={6}
-                bgGradient="linear(to-r, blue.400, purple.500)"
-                bgClip="text"
-            >
-                Upcoming Assignments
-            </Heading>
+            <HStack justify="space-between" align="center" mb={6}>
+                <Heading
+                    as="h1"
+                    size="xl"
+                    bgGradient="linear(to-r, blue.400, purple.500)"
+                    bgClip="text"
+                >
+                    Upcoming Assignments
+                </Heading>
+                <IconButton
+                    aria-label="Refresh assignments"
+                    icon={<RepeatIcon />}
+                    onClick={handleRetry}
+                    isLoading={loading}
+                    colorScheme="blue"
+                    variant="ghost"
+                    size="lg"
+                    _hover={{ transform: 'rotate(180deg)' }}
+                    transition="transform 0.3s"
+                />
+            </HStack>
 
             {loading && (
                 <VStack spacing={4} align="stretch">
