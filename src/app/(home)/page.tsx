@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import HomePage from "@/components/app/HomePage";
+import HomePage from "@/components/app/home/HomePage";
 
 export const metadata: Metadata = {
     title: "UniHub - Question Bank",

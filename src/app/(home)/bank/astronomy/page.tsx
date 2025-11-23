@@ -1,4 +1,5 @@
-import AstronomyPage from "@/components/app/bank/subjects/AstronomyPage";
+
+import AstronomyPage from "@/components/app/home/bank/subjects/AstronomyPage";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

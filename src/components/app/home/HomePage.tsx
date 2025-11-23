@@ -2,8 +2,8 @@
 
 import { Box, Container, Heading, Text, Button, VStack, SimpleGrid } from "@chakra-ui/react";
 import Link from "next/link";
-import Footer from "../ui/footer";
-import PublicNavbar from "../ui/public-navbar";
+import Footer from "../../ui/footer";
+import PublicNavbar from "../../ui/public-navbar";
 
 export default function HomePage() {
     return (

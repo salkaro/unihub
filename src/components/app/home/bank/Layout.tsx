@@ -3,8 +3,8 @@
 import { Box, Container, Button, Heading, Text, VStack, Input, InputGroup, InputLeftElement, HStack } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import Link from "next/link";
-import Footer from "../../ui/footer";
-import PublicNavbar from "../../ui/public-navbar";
+import PublicNavbar from "@/components/ui/public-navbar";
+import Footer from "@/components/ui/footer";
 
 interface BankLayoutProps {
     children: React.ReactNode;

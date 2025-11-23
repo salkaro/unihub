@@ -1,5 +1,5 @@
+import PhysicsPage from "@/components/app/home/bank/subjects/PhysicsPage";
 import type { Metadata } from "next";
-import PhysicsPage from "@/components/app/bank/subjects/PhysicsPage";
 
 export const metadata: Metadata = {
     title: "Physics - Question Bank - UniHub",

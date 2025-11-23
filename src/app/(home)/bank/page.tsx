@@ -1,5 +1,5 @@
+import BankPage from "@/components/app/home/bank/BankPage";
 import type { Metadata } from "next";
-import BankPage from "@/components/app/bank/BankPage";
 
 export const metadata: Metadata = {
     title: "Question Bank - UniHub",

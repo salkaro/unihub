@@ -17,7 +17,7 @@ import {
     AlertDescription,
     Text
 } from "@chakra-ui/react";
-import Footer from '../../ui/footer';
+import Footer from '../../../ui/footer';
 import PublicNavbar from '@/components/ui/public-navbar';
 
 

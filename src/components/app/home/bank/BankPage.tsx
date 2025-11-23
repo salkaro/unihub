@@ -2,8 +2,8 @@
 
 import { Box, Container, Heading, Text, VStack, SimpleGrid } from "@chakra-ui/react";
 import SubjectCard from "@/components/ui/subject-card";
-import Footer from "../../ui/footer";
-import PublicNavbar from "../../ui/public-navbar";
+import Footer from "@/components/ui/footer";
+import PublicNavbar from "@/components/ui/public-navbar";
 
 interface Subject {
     id: string;

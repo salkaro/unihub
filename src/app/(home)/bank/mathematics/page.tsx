@@ -1,5 +1,5 @@
+import MathematicsPage from "@/components/app/home/bank/subjects/MathematicsPage";
 import type { Metadata } from "next";
-import MathematicsPage from "@/components/app/bank/subjects/MathematicsPage";
 
 export const metadata: Metadata = {
     title: "Mathematics - Question Bank - UniHub",
