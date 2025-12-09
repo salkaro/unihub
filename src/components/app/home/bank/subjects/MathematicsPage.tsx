@@ -18,7 +18,7 @@ const topics: Topic[] = [
         id: "variants",
         title: "Variant Questions",
         description: "Questions from each topic",
-        questionCount: 42,
+        questionCount: 48,
         pdfUrl: "/pdfs/math/variant.pdf",
     },
     {

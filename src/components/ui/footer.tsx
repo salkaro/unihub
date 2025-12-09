@@ -61,6 +61,7 @@ export default function Footer() {
                             Resources
                         </Heading>
                         <ChakraLink
+                            href="/documentation"
                             color="gray.400"
                             fontSize="sm"
                             _hover={{ color: "white" }}
@@ -69,6 +70,7 @@ export default function Footer() {
                             Documentation
                         </ChakraLink>
                         <ChakraLink
+                            href="/guides"
                             color="gray.400"
                             fontSize="sm"
                             _hover={{ color: "white" }}
@@ -77,6 +79,7 @@ export default function Footer() {
                             Guides
                         </ChakraLink>
                         <ChakraLink
+                            href="/help"
                             color="gray.400"
                             fontSize="sm"
                             _hover={{ color: "white" }}
@@ -92,6 +95,7 @@ export default function Footer() {
                             Company
                         </Heading>
                         <ChakraLink
+                            href="/about"
                             color="gray.400"
                             fontSize="sm"
                             _hover={{ color: "white" }}
@@ -100,6 +104,7 @@ export default function Footer() {
                             About
                         </ChakraLink>
                         <ChakraLink
+                            href="/contact"
                             color="gray.400"
                             fontSize="sm"
                             _hover={{ color: "white" }}
@@ -108,6 +113,7 @@ export default function Footer() {
                             Contact
                         </ChakraLink>
                         <ChakraLink
+                            href="/privacy"
                             color="gray.400"
                             fontSize="sm"
                             _hover={{ color: "white" }}

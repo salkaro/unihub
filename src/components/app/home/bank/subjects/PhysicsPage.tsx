@@ -17,9 +17,23 @@ const topics: Topic[] = [
     {
         id: "circular-motion",
         title: "Circular Motion",
-        description: "Uniform and non-uniform circular motion, centripetal force, angular velocity/acceleration, and applications in orbital motion.",
+        description: "Uniform and non-uniform circular motion, centripetal force, angular velocity/acceleration, and applications in orbital motion",
         questionCount: 20,
         pdfUrl: "/pdfs/physics/circular-motion.pdf",
+    },
+    {
+        id: "waves-and-optics",
+        title: "Waves & Optics",
+        description: "Mecahnical Waves, Sound Waves, Wave Properties of Light, Polarisation, and The Doppler Effect",
+        questionCount: 10,
+        pdfUrl: "/pdfs/physics/waves-and-optics.pdf",
+    },
+    {
+        id: "oscillations",
+        title: "Oscillations",
+        description: "Simple Harmonic Motion, Pendulums, Damping, Resonance, and Energy and Circuits",
+        questionCount: 27,
+        pdfUrl: "/pdfs/physics/oscillations.pdf",
     },
 ];
 
