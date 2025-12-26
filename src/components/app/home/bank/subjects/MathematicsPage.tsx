@@ -48,6 +48,13 @@ const topics: Topic[] = [
         description: "Summations, divisbility, matrices",
         questionCount: 19,
         pdfUrl: "/pdfs/math/proof-by-induction.pdf",
+    },
+    {
+        id: "limits",
+        title: "Limits",
+        description: "Pinching Theorem, Change of Variables, Calculus of Limits Theorem",
+        questionCount: 10,
+        pdfUrl: "/pdfs/math/limits.pdf",
     }
 ];
 

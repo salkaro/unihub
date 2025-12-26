@@ -21,7 +21,7 @@ const subjects: Subject[] = [
         title: "Mathematics",
         description: "Calculus, Linear Algebra, Differential Equations, and more advanced mathematical concepts",
         moduleCount: 5,
-        questionCount: 90,
+        questionCount: 100,
         color: "blue",
         href: "/bank/mathematics",
     },
